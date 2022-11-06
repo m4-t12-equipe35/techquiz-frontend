@@ -1,15 +1,13 @@
 import "./App.css";
-import Homepage from "./components/Home/home";
-import GlobalStyle from "../src/styles/global";
 import Router from "./routes";
+import GlobalStyle from "./styles/global";
 
 function App() {
   return (
-    <div className="App">
-      <Homepage />
+    <>
       <GlobalStyle />
       <Router />
-    </div>
+    </>
   );
 }
 
