@@ -1,17 +1,6 @@
-import {createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
-interface IGLobal {
-  theme: {
-    body: string;
-    header: string;
-    fontColor: string;
-    button: string;
-    boderBottom: string;
-    svgColor: string;
-  };
-}
-
-export default createGlobalStyle<IGLobal>`
+const GlobalStyle = createGlobalStyle`
 :root {
 --blue: #117CB9;
 --blue-light:#52B4EB;
@@ -53,38 +42,7 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-body {
-	line-height: 1;	
-	background-color: ${({ theme }) => theme.body};
-	color: ${({ theme }) => theme.fontColor};
-}
-button {
-	color: ${({ theme }) => theme.button};
-	cursor: pointer;
-}
-svg {
-	.nav--params {
-		color: ${({ theme }) => theme.svgColor};
-	}
-}
-header {
-	background-color: ${({ theme }) => theme.header};
-	border-bottom: ${({ theme }) => theme.boderBottom};
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-* 
+
 `;
+
+export default GlobalStyle;
