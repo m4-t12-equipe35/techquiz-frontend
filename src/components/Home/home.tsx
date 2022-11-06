@@ -8,6 +8,8 @@ interface ITech {
 
 const Homepage = () => {
   const [tech, setTech] = useState<ITech[]>([]);
+  const [filterTech, setFilterTech] = useState<ITech[]>([]);
+  const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
     api
@@ -18,15 +20,13 @@ const Homepage = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const [search, setSearch] = useState("");
-
   const showTechs = () => {
-    if (tech) {
-      const input = search.toLocaleLowerCase();
+    if (filterTech) {
+      const input = searchInput.toLocaleLowerCase();
       const productInput = tech.filter((elem) =>
         elem.name.toLowerCase().includes(input)
       );
-      setTech(productInput);
+      setFilterTech(productInput);
     }
   };
 
@@ -37,7 +37,7 @@ const Homepage = () => {
         <div>
           <p>Teste seus conhecimentos sobre as tecnologias que você gosta</p>
           <input
-            onChange={(event) => setSearch(event.target.value)}
+            onChange={(event) => setSearchInput(event.target.value)}
             type="text"
             placeholder="Pesquise uma tecnologia"
           />
@@ -53,9 +53,13 @@ const Homepage = () => {
         <img src="" alt="image2" />
       </div>
       <ul>
-        {tech.map((elem) => {
-          return <li key={elem.id}>{elem.name}</li>;
-        })}
+        {tech
+          ?.filter((elem) =>
+            elem.name.toLowerCase().includes(searchInput.toLowerCase())
+          )
+          .map((elem) => {
+            return <li key={elem.id}>{elem.name}</li>;
+          })}
       </ul>
       <div>
         <p>Teste seus conhecimentos sobre as tecnologias que você gosta</p>
