@@ -1,4 +1,5 @@
 import "./App.css";
+import Footer from "./components/Footer";
 import Router from "./routes";
 import GlobalStyle from "./styles/global";
 
@@ -7,6 +8,7 @@ function App() {
     <>
       <GlobalStyle />
       <Router />
+      <Footer/>
     </>
   );
 }
