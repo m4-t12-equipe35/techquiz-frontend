@@ -14,7 +14,9 @@ const GlobalStyle = createGlobalStyle`
 --white: #FFFF;
 --black:#000;
 
-
+body{
+	font-family: sans-serif;
+}
 }
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote,

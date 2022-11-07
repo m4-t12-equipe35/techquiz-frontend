@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { ContainerInfo, ListTechs, BoxInfo } from "./home.style";
 import api from "../../services";
+
 interface ITech {
   id: string;
   name: string;
@@ -32,27 +34,30 @@ const Homepage = () => {
 
   return (
     <>
-      <div>
-        <img src="" alt="image1" />
+      <ContainerInfo>
+        <img src="" alt="1" />
         <div>
           <p>Teste seus conhecimentos sobre as tecnologias que você gosta</p>
-          <input
-            onChange={(event) => setSearchInput(event.target.value)}
-            type="text"
-            placeholder="Pesquise uma tecnologia"
-          />
-          <button
-            type="submit"
-            onClick={() => {
-              showTechs();
-            }}
-          >
-            Buscar
-          </button>
+          <div>
+            {" "}
+            <input
+              onChange={(event) => setSearchInput(event.target.value)}
+              type="text"
+              placeholder="Pesquise uma tecnologia"
+            />
+            <button
+              type="submit"
+              onClick={() => {
+                showTechs();
+              }}
+            >
+              Buscar
+            </button>
+          </div>
         </div>
-        <img src="" alt="image2" />
-      </div>
-      <ul>
+        <img src="" alt="2" />
+      </ContainerInfo>
+      <ListTechs>
         {tech
           ?.filter((elem) =>
             elem.name.toLowerCase().includes(searchInput.toLowerCase())
@@ -60,10 +65,10 @@ const Homepage = () => {
           .map((elem) => {
             return <li key={elem.id}>{elem.name}</li>;
           })}
-      </ul>
-      <div>
+      </ListTechs>
+      <BoxInfo>
         <p>Teste seus conhecimentos sobre as tecnologias que você gosta</p>
-      </div>
+      </BoxInfo>
     </>
   );
 };
