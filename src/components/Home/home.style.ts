@@ -1,8 +1,14 @@
 import styled from "styled-components";
 
+export const Overflow = styled.div`
+  @media (max-width: 700px) {
+    overflow-x: scroll;
+  }
+`;
+
 export const BoxInfo = styled.div`
   background: #52b4eb;
-  height: 57.8vh;
+  height: 47vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,7 +23,7 @@ export const BoxInfo = styled.div`
 
 export const ListTechs = styled.ul`
   position: absolute;
-  top: 21rem;
+  top: 25rem;
   left: 31%;
   display: flex;
   gap: 4rem;
@@ -32,6 +38,17 @@ export const ListTechs = styled.ul`
     height: 7rem;
     width: 13rem;
   }
+
+  @media (max-width: 1470px) {
+    left: 20%;
+  }
+  @media (max-width: 950px) {
+    left: 5%;
+  }
+  @media (max-width: 800px) {
+    left: 2%;
+    gap: 1rem;
+  }
 `;
 
 export const ContainerInfo = styled.div`
@@ -41,6 +58,21 @@ export const ContainerInfo = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  img {
+    width: 32rem;
+    height: 14rem;
+  }
+  .imgCatPc {
+    width: 32rem;
+    height: 10rem;
+  }
+
+  @media (max-width: 1470px) {
+    img {
+      display: none;
+    }
+  }
 
   div {
     display: flex;

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { ContainerInfo, ListTechs, BoxInfo } from "./home.style";
+import { ContainerInfo, ListTechs, BoxInfo, Overflow } from "./home.style";
+import CatPc from "../../assets/catpc.svg";
+import Women from "../../assets/women.svg";
 import api from "../../services";
 
 interface ITech {
@@ -35,7 +37,7 @@ const Homepage = () => {
   return (
     <>
       <ContainerInfo>
-        <img src="" alt="1" />
+        <img src={Women} alt="mulher no quadro" />
         <div>
           <p>Teste seus conhecimentos sobre as tecnologias que você gosta</p>
           <div>
@@ -55,17 +57,19 @@ const Homepage = () => {
             </button>
           </div>
         </div>
-        <img src="" alt="2" />
+        <img src={CatPc} alt="mulher com gato" className="imgCatPc" />
       </ContainerInfo>
-      <ListTechs>
-        {tech
-          ?.filter((elem) =>
-            elem.name.toLowerCase().includes(searchInput.toLowerCase())
-          )
-          .map((elem) => {
-            return <li key={elem.id}>{elem.name}</li>;
-          })}
-      </ListTechs>
+      <Overflow>
+        <ListTechs>
+          {tech
+            ?.filter((elem) =>
+              elem.name.toLowerCase().includes(searchInput.toLowerCase())
+            )
+            .map((elem) => {
+              return <li key={elem.id}>{elem.name}</li>;
+            })}
+        </ListTechs>
+      </Overflow>
       <BoxInfo>
         <p>Teste seus conhecimentos sobre as tecnologias que você gosta</p>
       </BoxInfo>
