@@ -23,8 +23,8 @@ export const BoxInfo = styled.div`
 
 export const ListTechs = styled.ul`
   position: absolute;
-  top: 25rem;
-  left: 31%;
+  top: 23rem;
+  left: 25%;
   display: flex;
   gap: 4rem;
   list-style: none;
