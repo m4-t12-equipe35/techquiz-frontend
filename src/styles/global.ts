@@ -45,6 +45,10 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
+body{
+	font-family: 'Inter', sans-serif;
+}
+
 `;
 
 export default GlobalStyle;

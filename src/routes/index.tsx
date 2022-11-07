@@ -1,9 +1,9 @@
-import { Route, Routes, Navigate } from "react-router-dom";
 import Homepage from "../components/Home/home";
-
+import { Route, Routes, Navigate } from "react-router-dom";
 const Router = () => {
   return (
     <Routes>
+      
       <Route path="/" element={"inserir page de cadastro"} />
       <Route path="/dashboard" element={<Homepage />} />
       <Route
