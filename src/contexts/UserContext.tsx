@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { createContext, useState, useEffect, ReactNode } from "react";
 import api from "../services/index";
 import { useNavigate } from "react-router-dom";
 
@@ -33,6 +33,7 @@ interface IRegisterResponse {
   stack: string;
   isAdm: boolean;
   isActive: boolean;
+  score: number;
 }
 
 // Interfaces relacionadas ao login:
@@ -49,6 +50,7 @@ interface ILoginResponse {
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 const UserProvider = ({ children }: IUserProps) => {
+  const [user, setUser] = useState<IRegisterResponse | null>(null);
   const token = localStorage.getItem("@TOKEN");
   let navigate = useNavigate();
 
@@ -78,6 +80,30 @@ const UserProvider = ({ children }: IUserProps) => {
         console.log(err);
       });
   }
+
+  // Requisição para o "autologin':
+
+  useEffect(() => {
+    async function autoLogin(): Promise<void> {
+      const token = localStorage.getItem("@TOKEN");
+
+      if (token) {
+        try {
+          api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+          const { data } = await api.get<IRegisterResponse>(
+            `/users/${user?.id}`
+          );
+
+          setUser(data);
+        } catch (error: unknown) {
+          console.error(error);
+          localStorage.clear();
+        }
+      }
+    }
+    autoLogin();
+  }, [user?.id]);
 
   return (
     <UserContext.Provider value={{ token, registerUser, loginUser }}>
