@@ -16,11 +16,12 @@ const GlobalStyle = createGlobalStyle`
 --pearl: #F3F3F3;
 --white: #FFFF;
 --black:#000;
+}
 
 body{
-	font-family: sans-serif;
+	background-color: var(--pearl);
 }
-}
+
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote,
 a, address, cite, code strong,center,
@@ -48,7 +49,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
-body{
+body, button, input{
 	font-family: 'Inter', sans-serif;
 }
 

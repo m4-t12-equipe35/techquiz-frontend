@@ -1,18 +1,13 @@
 import Dashboard from "../pages/Dashboard/";
 import LoginRegister from "../pages/LoginRegister";
 import { Route, Routes, Navigate } from "react-router-dom";
-
+import QuestionsPage from "../pages/QuestionsPage";
 const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<LoginRegister />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route
-        path="/questions"
-        element={
-          "inserir page de questions que tem todas as perguntas da tech selecionada"
-        }
-      />
+      <Route path="/questions" element={<QuestionsPage />} />
       <Route
         path="/answers"
         element={
