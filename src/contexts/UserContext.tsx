@@ -3,11 +3,24 @@ import api from "../services";
 import { useNavigate } from "react-router-dom";
 import { notifyError, notifySucess } from "../components/Toasts";
 
-interface UserProps {
+// Interface para tipar o contexto:
+
+interface IUserContext {
+  registerUser: (data: IRegisterFunction) => void;
+  loginUser: (data: ILoginFunction) => void;
+  logout: () => void;
+  token: string | null;
+}
+
+// Interface para tipar as props:
+
+interface IUserProps {
   children: ReactNode;
 }
 
-export interface IRegisterUser {
+// Interfaces relacionadas ao cadastro de usuário:
+
+export interface IRegisterFunction {
   name: string;
   email: string;
   password: string;
@@ -16,39 +29,39 @@ export interface IRegisterUser {
   isAdm?: boolean;
 }
 
-interface IRegisterUserResponse {
+interface IRegisterResponse {
+  id: string;
   name: string;
   email: string;
   stack: string;
   isAdm: boolean;
   isActive: boolean;
-  id: string;
   score: number;
 }
 
-export interface IUserLogin {
+// Interfaces relacionadas ao login:
+
+export interface ILoginFunction {
   email: string;
   password: string;
-  token: string;
 }
 
-interface IUserContext {
-  registerUser: (data: IRegisterUser) => void;
-  userLogin: (data: IUserLogin) => void;
-  logout: () => void;
+interface ILoginResponse {
+  token: string;
 }
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
-export const UserProvider = ({ children }: UserProps) => {
+export const UserProvider = ({ children }: IUserProps) => {
+  const token = localStorage.getItem("@TOKEN");
   const navigate = useNavigate();
 
-  function registerUser(data: IRegisterUser) {
+  function registerUser(data: IRegisterFunction) {
     data.isAdm = false;
     const { confirmPassword, ...rest } = data;
 
     api
-      .post<IRegisterUserResponse>("/users", rest)
+      .post<IRegisterResponse>("/users", rest)
       .then(() => {
         notifySucess("Conta criada com sucesso!");
       })
@@ -57,16 +70,16 @@ export const UserProvider = ({ children }: UserProps) => {
       });
   }
 
-  function userLogin(data: IUserLogin) {
+  function loginUser(data: ILoginFunction) {
     api
-      .post<IUserLogin>("/login", data)
+      .post<ILoginResponse>("/login", data)
       .then((res) => {
         notifySucess("Login realizado com sucesso!");
+        window.localStorage.setItem("@TOKEN", res.data.token);
         navigate("/dashboard", { replace: true });
-        window.localStorage.setItem("token", res.data.token);
       })
       .catch((err) => {
-        notifyError("Email ou senha incorretos");
+        notifyError("Email ou senha incorretos...");
       });
   }
 
@@ -79,8 +92,9 @@ export const UserProvider = ({ children }: UserProps) => {
     <UserContext.Provider
       value={{
         registerUser,
-        userLogin,
+        loginUser,
         logout,
+        token,
       }}
     >
       {children}
