@@ -1,9 +1,12 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+ @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;400&family=Inter:wght@300;400;500;700&family=Montserrat:wght@400;700&family=Nunito:wght@700&family=Poppins:ital,wght@0,200;0,500;1,300&family=Righteous&family=Roboto+Slab&family=Roboto:wght@100;400&family=Sarala&display=swap");
+
 :root {
 --blue: #117CB9;
 --blue-light:#52B4EB;
+--blue-darker: #3d92c1;
 --grey:#A39F9F;
 --grey-bar: #D3D3D3;
 --grey-light: #E8E8E8;
