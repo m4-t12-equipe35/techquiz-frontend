@@ -1,6 +1,6 @@
-import Dashboard from "../pages/Dashboard/";
-import LoginRegister from "../pages/LoginRegister";
 import { Route, Routes, Navigate } from "react-router-dom";
+import LoginRegister from "../pages/LoginRegister";
+import Dashboard from "../pages/Dashboard/";
 import QuestionsPage from "../pages/QuestionsPage";
 const Router = () => {
   return (

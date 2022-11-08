@@ -33,7 +33,6 @@ export const QuestionContext = createContext<IQuestionContext>(
 
 export function QuestionProvider({ children }: IQuestionProviderProps) {
   const [questions, setQuestions] = useState<IQuestion[]>([] as IQuestion[]);
-  // const token = localStorage.getItem("@TOKEN");
 
   useEffect(() => {
     console.log("use effect");

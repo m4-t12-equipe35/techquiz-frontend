@@ -3,6 +3,7 @@ import { ContainerInfo, ListTechs, BoxInfo, Overflow } from "./home.style";
 import CatPc from "../../assets/catpc.svg";
 import Women from "../../assets/women.svg";
 import api from "../../services";
+import { useNavigate } from "react-router-dom";
 
 interface ITech {
   id: string;
@@ -11,15 +12,22 @@ interface ITech {
 }
 
 const Homepage = () => {
-  const [tech, setTech] = useState<ITech[]>([]);
+  const [techs, setTechs] = useState<ITech[]>([]);
+  const [techId, setTechId] = useState<string>("");
   const [filterTech, setFilterTech] = useState<ITech[]>([]);
   const [searchInput, setSearchInput] = useState("");
+  const navigate = useNavigate();
+
+  function selectTech(id: string) {
+    setTechId(id);
+    navigate("/questions");
+  }
 
   useEffect(() => {
     api
       .get("/techs")
       .then((res) => {
-        setTech(res.data);
+        setTechs(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -27,7 +35,7 @@ const Homepage = () => {
   const showTechs = () => {
     if (filterTech) {
       const input = searchInput.toLocaleLowerCase();
-      const productInput = tech.filter((elem) =>
+      const productInput = techs.filter((elem) =>
         elem.name.toLowerCase().includes(input)
       );
       setFilterTech(productInput);
@@ -61,12 +69,16 @@ const Homepage = () => {
       </ContainerInfo>
       <Overflow>
         <ListTechs>
-          {tech
+          {techs
             ?.filter((elem) =>
               elem.name.toLowerCase().includes(searchInput.toLowerCase())
             )
             .map((elem) => {
-              return <li key={elem.id}>{elem.name}</li>;
+              return (
+                <li key={elem.id} onClick={() => selectTech(elem.id)}>
+                  {elem.name}
+                </li>
+              );
             })}
         </ListTechs>
       </Overflow>

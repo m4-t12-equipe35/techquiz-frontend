@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 import { useContext } from "react";
 import {
   QuestionItem,
@@ -5,14 +6,16 @@ import {
   QuestionsList,
   QuestionsMain,
   QuestionsRight,
-} from "../components/Questions/Questions.style";
-import { QuestionContext } from "../contexts/QuestionsContext";
-import questionFigure from "../assets/questions.svg";
+} from "../../components/Questions/Questions.style";
+import { QuestionContext } from "../../contexts/QuestionsContext";
+import { UserContext } from "../../contexts/UserContext";
+import questionFigure from "../../assets/questions.svg";
 
 const QuestionsPage = () => {
   const { questions } = useContext(QuestionContext);
+  const { token } = useContext(UserContext);
 
-  return (
+  return token ? (
     <QuestionsMain>
       <QuestionsLeft>
         <div>
@@ -37,6 +40,8 @@ const QuestionsPage = () => {
         </QuestionsList>
       </QuestionsRight>
     </QuestionsMain>
+  ) : (
+    <Navigate to="/" />
   );
 };
 
