@@ -1,13 +1,15 @@
-import { createContext, useState, useEffect, ReactNode } from "react";
-import api from "../services/index";
+import { createContext, ReactNode } from "react";
+import api from "../services";
 import { useNavigate } from "react-router-dom";
+import { notifyError, notifySucess } from "../components/Toasts";
 
 // Interface para tipar o contexto:
 
 interface IUserContext {
-  token: string | null;
   registerUser: (data: IRegisterFunction) => void;
   loginUser: (data: ILoginFunction) => void;
+  logout: () => void;
+  token: string | null;
 }
 
 // Interface para tipar as props:
@@ -22,8 +24,9 @@ export interface IRegisterFunction {
   name: string;
   email: string;
   password: string;
-  confirmPassword: string;
+  confirmPassword?: string;
   stack: string;
+  isAdm?: boolean;
 }
 
 interface IRegisterResponse {
@@ -49,67 +52,76 @@ interface ILoginResponse {
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
-const UserProvider = ({ children }: IUserProps) => {
-  const [user, setUser] = useState<IRegisterResponse | null>(null);
+export const UserProvider = ({ children }: IUserProps) => {
   const token = localStorage.getItem("@TOKEN");
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // Requisição de cadastro:
+  function registerUser(data: IRegisterFunction) {
+    data.isAdm = false;
+    const { confirmPassword, ...rest } = data;
 
-  function registerUser(formData: IRegisterFunction): void {
     api
-      .post<IRegisterResponse>("/users", formData)
+      .post<IRegisterResponse>("/users", rest)
       .then(() => {
-        setTimeout(() => navigate("/login"), 3000);
+        notifySucess("Conta criada com sucesso!");
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        notifyError("Erro ao realizar cadastro");
       });
   }
 
-  // Requisição de login:
-
-  function loginUser(formData: ILoginFunction): void {
+  function loginUser(data: ILoginFunction) {
     api
-      .post<ILoginResponse>("/login", formData)
-      .then((response) => {
-        localStorage.setItem("@TOKEN", response.data.token);
-        setTimeout(() => navigate("/dashboard"), 3000);
+      .post<ILoginResponse>("/login", data)
+      .then((res) => {
+        notifySucess("Login realizado com sucesso!");
+        navigate("/dashboard", { replace: true });
+        window.localStorage.setItem("token", res.data.token);
       })
       .catch((err) => {
-        console.log(err);
+        notifyError("Email ou senha incorretos...");
       });
+  }
+
+  function logout() {
+    window.localStorage.clear();
+    navigate("/");
   }
 
   // Requisição para o "autologin':
 
-  useEffect(() => {
-    async function autoLogin(): Promise<void> {
-      const token = localStorage.getItem("@TOKEN");
+  // useEffect(() => {
+  //   async function autoLogin(): Promise<void> {
+  //     const token = localStorage.getItem("@TOKEN");
 
-      if (token) {
-        try {
-          api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  //     if (token) {
+  //       try {
+  //         api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-          const { data } = await api.get<IRegisterResponse>(
-            `/users/${user?.id}`
-          );
+  //         const { data } = await api.get<IRegisterResponse>(
+  //           `/users/${user?.id}`
+  //         );
 
-          setUser(data);
-        } catch (error: unknown) {
-          console.error(error);
-          localStorage.clear();
-        }
-      }
-    }
-    autoLogin();
-  }, [user?.id]);
+  //         setUser(data);
+  //       } catch (error: unknown) {
+  //         console.error(error);
+  //         localStorage.clear();
+  //       }
+  //     }
+  //   }
+  //   autoLogin();
+  // }, [user?.id]);
 
   return (
-    <UserContext.Provider value={{ token, registerUser, loginUser }}>
+    <UserContext.Provider
+      value={{
+        registerUser,
+        loginUser,
+        logout,
+        token,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
 };
-
-export default UserProvider;
