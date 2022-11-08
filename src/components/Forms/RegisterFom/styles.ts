@@ -47,6 +47,28 @@ export const Box = styled.div`
     align-self: center;
     margin: 2.5rem 6.25rem;
   }
+
+  @media screen and (max-width: 520px) {
+    width: 100%;
+
+    .formHeader {
+      width: 100%;
+    }
+
+    .formContainer {
+      width: 80%;
+    }
+  }
+
+  @media screen and (max-width: 1105px) {
+    flex-direction: column;
+
+    .formHeader {
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
 `;
 
 export const Form = styled.form`
@@ -101,6 +123,22 @@ export const Form = styled.form`
       background-color: var(--blue);
     }
   }
+
+  @media screen and (max-width: 520px) {
+    width: 100%;
+
+    label,
+    input,
+    select {
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 1105px) {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;
 
 export const MsgErro = styled.div`
@@ -114,9 +152,22 @@ export const MsgErro = styled.div`
 `;
 
 export const FormImg = styled.img`
-  display: flex;
-  position: fixed;
-  left: 635px;
-  bottom: 10px;
   width: 740px;
+  height: 601px;
+
+  @media screen and (max-width: 520px) {
+    display: none;
+  }
+
+  @media screen and (max-width: 1105px) {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+  }
+
+  @media screen and (max-width: 1278px) {
+    width: 40%;
+    height: 50%;
+  }
 `;
