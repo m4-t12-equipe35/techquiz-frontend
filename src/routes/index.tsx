@@ -5,7 +5,7 @@ import QuestionsPage from "../pages/QuestionsPage";
 const Router = () => {
   return (
     <Routes>
-      <Route path="/" element={"inserir page de cadastro"} />
+      <Route path="/" element={<LoginRegister />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/questions" element={<QuestionsPage />} />
       <Route
