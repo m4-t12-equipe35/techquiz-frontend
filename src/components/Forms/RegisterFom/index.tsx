@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import registerSchema from "../../../validators/registerValidator";
-import { IRegisterUser, UserContext } from "../../../contexts/UserContext";
+import { IRegisterFunction, UserContext } from "../../../contexts/UserContext";
 import { Form, MsgErro } from "./styles";
 import { useContext } from "react";
 
@@ -12,9 +12,9 @@ const RegisterForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IRegisterUser>({ resolver: yupResolver(registerSchema) });
+  } = useForm<IRegisterFunction>({ resolver: yupResolver(registerSchema) });
 
-  function onSubmitRegisterFunction(data: IRegisterUser) {
+  function onSubmitRegisterFunction(data: IRegisterFunction) {
     const { confirmPassword, ...newUser } = data;
     registerUser(newUser);
   }

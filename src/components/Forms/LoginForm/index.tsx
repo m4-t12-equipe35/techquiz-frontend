@@ -1,21 +1,21 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import loginSchema from "../../../validators/loginValidator";
-import { IUserLogin, UserContext } from "../../../contexts/UserContext";
+import { ILoginFunction, UserContext } from "../../../contexts/UserContext";
 import { Form, MsgErro } from "../RegisterFom/styles";
 import { useContext } from "react";
 
 const LoginForm = () => {
-  const { userLogin } = useContext(UserContext);
+  const { loginUser } = useContext(UserContext);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IUserLogin>({ resolver: yupResolver(loginSchema) });
+  } = useForm<ILoginFunction>({ resolver: yupResolver(loginSchema) });
 
   return (
-    <Form typeof="submit" onSubmit={handleSubmit(userLogin)}>
+    <Form typeof="submit" onSubmit={handleSubmit(loginUser)}>
       <label htmlFor="email">Email</label>
       <input
         type="email"

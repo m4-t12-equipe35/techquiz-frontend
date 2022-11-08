@@ -41,7 +41,7 @@ interface IRegisterResponse {
 
 // Interfaces relacionadas ao login:
 
-interface ILoginFunction {
+export interface ILoginFunction {
   email: string;
   password: string;
 }
@@ -75,8 +75,8 @@ export const UserProvider = ({ children }: IUserProps) => {
       .post<ILoginResponse>("/login", data)
       .then((res) => {
         notifySucess("Login realizado com sucesso!");
+        window.localStorage.setItem("@TOKEN", res.data.token);
         navigate("/dashboard", { replace: true });
-        window.localStorage.setItem("token", res.data.token);
       })
       .catch((err) => {
         notifyError("Email ou senha incorretos...");
@@ -87,30 +87,6 @@ export const UserProvider = ({ children }: IUserProps) => {
     window.localStorage.clear();
     navigate("/");
   }
-
-  // Requisição para o "autologin':
-
-  // useEffect(() => {
-  //   async function autoLogin(): Promise<void> {
-  //     const token = localStorage.getItem("@TOKEN");
-
-  //     if (token) {
-  //       try {
-  //         api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
-  //         const { data } = await api.get<IRegisterResponse>(
-  //           `/users/${user?.id}`
-  //         );
-
-  //         setUser(data);
-  //       } catch (error: unknown) {
-  //         console.error(error);
-  //         localStorage.clear();
-  //       }
-  //     }
-  //   }
-  //   autoLogin();
-  // }, [user?.id]);
 
   return (
     <UserContext.Provider
