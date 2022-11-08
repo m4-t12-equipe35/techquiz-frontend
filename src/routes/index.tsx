@@ -1,4 +1,4 @@
-import Homepage from "../components/Home/home";
+import Dashboard from "../pages/Dashboard/";
 import LoginRegister from "../pages/LoginRegister";
 import { Route, Routes, Navigate } from "react-router-dom";
 
@@ -6,7 +6,7 @@ const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<LoginRegister />} />
-      <Route path="/dashboard" element={<Homepage />} />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route
         path="/questions"
         element={

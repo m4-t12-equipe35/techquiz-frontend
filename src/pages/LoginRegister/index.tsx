@@ -1,11 +1,11 @@
 import { useState } from "react";
-import LoginForm from "../components/Forms/LoginForm";
-import RegisterForm from "../components/Forms/RegisterFom";
-import { Box, FormImg } from "../components/Forms/RegisterFom/styles";
+import LoginForm from "../../components/Forms/LoginForm";
+import RegisterForm from "../../components/Forms/RegisterFom";
+import { Box, FormImg } from "../../components/Forms/RegisterFom/styles";
 import { MdOutlineLogin } from "react-icons/md";
 import { FaUserPlus } from "react-icons/fa";
-import { ButtonColor } from "../components/Forms/styles";
-import formLogo from "../assets/formLogo.svg";
+import { ButtonColor } from "../../components/Forms/styles";
+import formLogo from "../../assets/formLogo.svg";
 
 const LoginRegister = () => {
   const [register, setRegister] = useState(true);
