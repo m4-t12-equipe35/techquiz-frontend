@@ -152,8 +152,10 @@ export const MsgErro = styled.div`
 `;
 
 export const FormImg = styled.img`
-  width: 740px;
-  height: 601px;
+  display: flex;
+  align-self: center;
+  width: 540px;
+  height: 401px;
 
   @media screen and (max-width: 520px) {
     display: none;
