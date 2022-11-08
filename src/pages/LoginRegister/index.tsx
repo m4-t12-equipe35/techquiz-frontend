@@ -72,7 +72,7 @@ const LoginRegister = () => {
         </div>
         {register ? <RegisterForm /> : <LoginForm />}
       </div>
-      <FormImg src={formLogo} alt="Formulário" />
+      <FormImg src={formLogo} alt="Imagem Formulário" />
     </Box>
   );
 };
