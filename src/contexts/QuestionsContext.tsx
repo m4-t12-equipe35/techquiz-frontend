@@ -16,7 +16,7 @@ interface IAnswersRequest {
   isCorrect: boolean;
 }
 
-interface IQuestionRequest {
+export interface IQuestionRequest {
   question: string;
   level: string;
   tech: ITech;
@@ -41,6 +41,8 @@ interface IQuestionContext {
   setTech: Dispatch<SetStateAction<ITech>>;
   filteredTech: ITech[];
   setFilteredTech: Dispatch<SetStateAction<ITech[]>>;
+  alreadyAnswered: any;
+  setAlreadyAnswered: any;
 }
 
 export interface ITech {
@@ -62,6 +64,7 @@ export function QuestionProvider({ children }: IQuestionProviderProps) {
   const [tech, setTech] = useState<ITech>({} as ITech);
   const [filteredTech, setFilteredTech] = useState<ITech[]>([]);
   const { token } = useContext(UserContext);
+  const [alreadyAnswered, setAlreadyAnswered] = useState()
 
   useEffect(() => {
     async function getQuestions(): Promise<void> {
@@ -90,6 +93,8 @@ export function QuestionProvider({ children }: IQuestionProviderProps) {
         setTech,
         filteredTech,
         setFilteredTech,
+        alreadyAnswered, 
+        setAlreadyAnswered
       }}
     >
       {children}

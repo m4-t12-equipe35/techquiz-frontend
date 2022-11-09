@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import {
   QuestionItem,
@@ -8,13 +8,23 @@ import {
   QuestionsRight,
   TechInfo,
 } from "../../components/Questions/Questions.style";
-import { QuestionContext } from "../../contexts/QuestionsContext";
+import { IQuestionRequest, QuestionContext } from "../../contexts/QuestionsContext";
 import { UserContext } from "../../contexts/UserContext";
 import questionFigure from "../../assets/questions.svg";
+import { AnswerContext, IAnswer, IAnswersRequest } from "../../contexts/AnswersContext";
+
 
 const QuestionsPage = () => {
   const { questionsByTech, tech } = useContext(QuestionContext);
+  const { setAnswers, setQuestionTitle } = useContext(AnswerContext);
   const { token } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  function selectQuestion(question: IQuestionRequest) {
+    setAnswers(question.answers);
+    setQuestionTitle(question.question);
+    navigate("/answers");
+  }
 
   return token ? (
     <QuestionsMain>
@@ -28,7 +38,7 @@ const QuestionsPage = () => {
       <QuestionsRight>
         <QuestionsList>
           {questionsByTech.map((question) => (
-            <QuestionItem key={question.id}>{question.question}</QuestionItem>
+            <QuestionItem key={question.id} onClick={() => selectQuestion(question)}>{question.question}</QuestionItem>
           ))}
         </QuestionsList>
       </QuestionsRight>

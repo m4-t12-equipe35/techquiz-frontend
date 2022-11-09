@@ -16,6 +16,9 @@ const GlobalStyle = createGlobalStyle`
 --pearl: #F3F3F3;
 --white: #FFFF;
 --black:#000;
+--green: #C6FB9D;
+--soft-pink: #F8C6C6;
+
 }
 
 body{
