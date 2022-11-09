@@ -4,9 +4,17 @@ import registerSchema from "../../../validators/registerValidator";
 import { IRegisterFunction, UserContext } from "../../../contexts/UserContext";
 import { Form, MsgErro } from "./styles";
 import { useContext } from "react";
+import apiEmail from "../../../services/email";
 
 const RegisterForm = () => {
   const { registerUser } = useContext(UserContext);
+
+  const sendEmail = (data: IRegisterFunction) => {
+    apiEmail
+      .post('/email', data)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+  }
 
   const {
     register,
@@ -17,6 +25,7 @@ const RegisterForm = () => {
   function onSubmitRegisterFunction(data: IRegisterFunction) {
     const { confirmPassword, ...newUser } = data;
     registerUser(newUser);
+    sendEmail(data)
   }
 
   return (
