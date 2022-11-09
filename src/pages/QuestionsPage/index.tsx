@@ -15,7 +15,6 @@ import questionFigure from "../../assets/questions.svg";
 const QuestionsPage = () => {
   const { questionsByTech, tech } = useContext(QuestionContext);
   const { token } = useContext(UserContext);
-  console.log(questionsByTech);
 
   return token ? (
     <QuestionsMain>

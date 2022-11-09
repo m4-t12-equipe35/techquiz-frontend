@@ -20,14 +20,10 @@ const Homepage = () => {
   const navigate = useNavigate();
 
   function selectTech(tech: ITech) {
-    console.log(questions);
     setTech(tech);
     const filteredQuestions = questions.filter(
       (question) => question.tech.id === tech.id
     );
-    console.log(tech);
-    console.log(questions[0].tech.id);
-
     setQuestionsByTech(filteredQuestions);
     navigate("/questions");
   }
