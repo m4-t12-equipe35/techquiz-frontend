@@ -6,39 +6,30 @@ import {
   QuestionsList,
   QuestionsMain,
   QuestionsRight,
+  TechInfo,
 } from "../../components/Questions/Questions.style";
 import { QuestionContext } from "../../contexts/QuestionsContext";
 import { UserContext } from "../../contexts/UserContext";
 import questionFigure from "../../assets/questions.svg";
 
 const QuestionsPage = () => {
-  const { questions, tech } = useContext(QuestionContext);
+  const { questionsByTech, tech } = useContext(QuestionContext);
   const { token } = useContext(UserContext);
-
-  console.log(tech);
 
   return token ? (
     <QuestionsMain>
       <QuestionsLeft>
-        <div>
-          <p>Question Tech</p>
-          <img src={questionFigure} alt="" />
-        </div>
+        <TechInfo>
+          <span>Perguntas sobre:</span>
+          <h2>{tech.name}</h2>
+        </TechInfo>
+        <img src={questionFigure} alt="" />
       </QuestionsLeft>
       <QuestionsRight>
         <QuestionsList>
-          <QuestionItem>
-            <p>Question 1</p>
-          </QuestionItem>
-          <QuestionItem>
-            <p>Question 2</p>
-          </QuestionItem>
-          <QuestionItem>
-            <p>Question 3</p>
-          </QuestionItem>
-          <QuestionItem>
-            <p>Question 4</p>
-          </QuestionItem>
+          {questionsByTech.map((question) => (
+            <QuestionItem key={question.id}>{question.question}</QuestionItem>
+          ))}
         </QuestionsList>
       </QuestionsRight>
     </QuestionsMain>
