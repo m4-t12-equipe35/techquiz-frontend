@@ -1,25 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ContainerInfo, ListTechs, BoxInfo, Overflow } from "./home.style";
 import CatPc from "../../assets/catpc.svg";
 import Women from "../../assets/women.svg";
 import api from "../../services";
 import { useNavigate } from "react-router-dom";
-
-interface ITech {
-  id: string;
-  name: string;
-  stack: string;
-}
+import { QuestionContext } from "../../contexts/QuestionsContext";
 
 const Homepage = () => {
-  const [techs, setTechs] = useState<ITech[]>([]);
-  const [techId, setTechId] = useState<string>("");
-  const [filterTech, setFilterTech] = useState<ITech[]>([]);
+  const { techList, setTechList, setTech, filteredTech, setFilteredTech } =
+    useContext(QuestionContext);
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
 
-  function selectTech(id: string) {
-    setTechId(id);
+  function selectTech(tech: object) {
+    setTech(tech);
     navigate("/questions");
   }
 
@@ -27,18 +21,18 @@ const Homepage = () => {
     api
       .get("/techs")
       .then((res) => {
-        setTechs(res.data);
+        setTechList(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [setTechList]);
 
   const showTechs = () => {
-    if (filterTech) {
+    if (filteredTech) {
       const input = searchInput.toLocaleLowerCase();
-      const productInput = techs.filter((elem) =>
+      const productInput = techList.filter((elem) =>
         elem.name.toLowerCase().includes(input)
       );
-      setFilterTech(productInput);
+      setFilteredTech(productInput);
     }
   };
 
@@ -69,13 +63,13 @@ const Homepage = () => {
       </ContainerInfo>
       <Overflow>
         <ListTechs>
-          {techs
+          {techList
             ?.filter((elem) =>
               elem.name.toLowerCase().includes(searchInput.toLowerCase())
             )
             .map((elem) => {
               return (
-                <li key={elem.id} onClick={() => selectTech(elem.id)}>
+                <li key={elem.id} onClick={() => selectTech(elem)}>
                   {elem.name}
                 </li>
               );

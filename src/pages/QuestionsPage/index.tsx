@@ -12,8 +12,10 @@ import { UserContext } from "../../contexts/UserContext";
 import questionFigure from "../../assets/questions.svg";
 
 const QuestionsPage = () => {
-  const { questions } = useContext(QuestionContext);
+  const { questions, tech } = useContext(QuestionContext);
   const { token } = useContext(UserContext);
+
+  console.log(tech);
 
   return token ? (
     <QuestionsMain>
