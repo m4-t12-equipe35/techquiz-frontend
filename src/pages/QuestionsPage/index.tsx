@@ -8,11 +8,13 @@ import {
   QuestionsRight,
   TechInfo,
 } from "../../components/Questions/Questions.style";
-import { IQuestionRequest, QuestionContext } from "../../contexts/QuestionsContext";
+import {
+  IQuestionRequest,
+  QuestionContext,
+} from "../../contexts/QuestionsContext";
 import { UserContext } from "../../contexts/UserContext";
 import questionFigure from "../../assets/questions.svg";
-import { AnswerContext, IAnswer, IAnswersRequest } from "../../contexts/AnswersContext";
-
+import { AnswerContext } from "../../contexts/AnswersContext";
 
 const QuestionsPage = () => {
   const { questionsByTech, tech } = useContext(QuestionContext);
@@ -38,7 +40,12 @@ const QuestionsPage = () => {
       <QuestionsRight>
         <QuestionsList>
           {questionsByTech.map((question) => (
-            <QuestionItem key={question.id} onClick={() => selectQuestion(question)}>{question.question}</QuestionItem>
+            <QuestionItem
+              key={question.id}
+              onClick={() => selectQuestion(question)}
+            >
+              {question.question}
+            </QuestionItem>
           ))}
         </QuestionsList>
       </QuestionsRight>

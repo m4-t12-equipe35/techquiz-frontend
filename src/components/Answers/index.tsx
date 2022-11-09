@@ -4,6 +4,7 @@ import { AnswersStyled } from "../Answers/style";
 import { UserContext } from "../../contexts/UserContext";
 import { AnswerContext, IAnswersRequest } from "../../contexts/AnswersContext";
 import { QuestionContext } from "../../contexts/QuestionsContext";
+import answersImage from "../../assets/womanInTheChair.svg";
 
 const Answers = () => {
   const { token } = useContext(UserContext);
@@ -83,7 +84,7 @@ const Answers = () => {
             </div>
           </div>
           <div className="mainLeft">
-            <img alt="imagem" />
+            <img src={answersImage} alt="imagem" />
           </div>
         </div>
         <div className="botton">
@@ -93,7 +94,7 @@ const Answers = () => {
               questionsPage();
             }}
           >
-            Voltar para página de perguntas
+            Voltar para as perguntas
           </button>
           <button
             className="bottonButtons"
@@ -101,7 +102,7 @@ const Answers = () => {
               nextQuestion();
             }}
           >
-            Próxima Pergunta
+            Próxima pergunta
           </button>
         </div>
       </AnswersStyled>
