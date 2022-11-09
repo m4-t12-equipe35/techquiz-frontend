@@ -1,4 +1,11 @@
-import { useState, createContext, ReactNode, useEffect } from "react";
+import {
+  useState,
+  createContext,
+  ReactNode,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import api from "../services/index";
 
 interface IAnswersRequest {
@@ -25,6 +32,18 @@ interface IQuestionProviderProps {
 interface IQuestionContext {
   questions: IQuestion[];
   // getQuestions: () => void;
+  techList: ITech[];
+  setTechList: Dispatch<SetStateAction<ITech[]>>;
+  tech: object;
+  setTech: Dispatch<SetStateAction<object>>;
+  filteredTech: ITech[];
+  setFilteredTech: Dispatch<SetStateAction<ITech[]>>;
+}
+
+interface ITech {
+  id: string;
+  name: string;
+  stack: string;
 }
 
 export const QuestionContext = createContext<IQuestionContext>(
@@ -33,7 +52,9 @@ export const QuestionContext = createContext<IQuestionContext>(
 
 export function QuestionProvider({ children }: IQuestionProviderProps) {
   const [questions, setQuestions] = useState<IQuestion[]>([] as IQuestion[]);
-  // const token = localStorage.getItem("@TOKEN");
+  const [techList, setTechList] = useState<ITech[]>([]);
+  const [tech, setTech] = useState<object>({});
+  const [filteredTech, setFilteredTech] = useState<ITech[]>([]);
 
   useEffect(() => {
     console.log("use effect");
@@ -52,7 +73,17 @@ export function QuestionProvider({ children }: IQuestionProviderProps) {
   }, []);
 
   return (
-    <QuestionContext.Provider value={{ questions }}>
+    <QuestionContext.Provider
+      value={{
+        questions,
+        techList,
+        setTechList,
+        tech,
+        setTech,
+        filteredTech,
+        setFilteredTech,
+      }}
+    >
       {children}
     </QuestionContext.Provider>
   );
