@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { UserProvider } from "./UserContext";
 import { QuestionProvider } from "./QuestionsContext";
+import { AnswareProvider } from "./AnswersContext";
 
 interface ProvidersProps {
   children: ReactNode;
@@ -9,7 +10,11 @@ interface ProvidersProps {
 export const Providers = ({ children }: ProvidersProps) => {
   return (
     <UserProvider>
-      <QuestionProvider>{children}</QuestionProvider>
+      <QuestionProvider>
+      <AnswareProvider>
+        {children}
+      </AnswareProvider>
+      </QuestionProvider>
     </UserProvider>
   );
 };

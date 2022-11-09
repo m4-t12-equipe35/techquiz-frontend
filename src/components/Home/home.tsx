@@ -15,6 +15,8 @@ const Homepage = () => {
     setFilteredTech,
     questions,
     setQuestionsByTech,
+    alreadyAnswered,
+    setAlreadyAnswered
   } = useContext(QuestionContext);
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
@@ -24,6 +26,7 @@ const Homepage = () => {
     const filteredQuestions = questions.filter(
       (question) => question.tech.id === tech.id
     );
+    setAlreadyAnswered([])
     setQuestionsByTech(filteredQuestions);
     navigate("/questions");
   }
