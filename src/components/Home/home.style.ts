@@ -16,14 +16,14 @@ export const BoxInfo = styled.div`
     width: 70%;
     font-size: 24px;
     background: white;
-    padding: 6rem;
+    padding: 5rem;
     border-radius: 15px;
   }
 `;
 
 export const ListTechs = styled.ul`
   position: absolute;
-  top: 23rem;
+  top: 24.5rem;
   left: 25%;
   display: flex;
   gap: 4rem;
