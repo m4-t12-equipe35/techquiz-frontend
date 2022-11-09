@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Box = styled.div`
   display: flex;
   gap: 0.813rem;
+  justify-content: center;
 
   .formHeader {
     display: flex;
@@ -156,6 +157,7 @@ export const FormImg = styled.img`
   align-self: center;
   width: 540px;
   height: 401px;
+  margin-left: 6rem;
 
   @media screen and (max-width: 520px) {
     display: none;
