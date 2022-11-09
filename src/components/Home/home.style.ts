@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import convertToRem from "../../utils/convertToRem";
 
 export const Overflow = styled.div`
-  @media (max-width: 700px) {
-    overflow-x: scroll;
-  }
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 export const BoxInfo = styled.div`
@@ -22,13 +23,15 @@ export const BoxInfo = styled.div`
 `;
 
 export const ListTechs = styled.ul`
+  width: 70%;
+  overflow-x: auto;
   position: absolute;
-  top: 24.5rem;
-  left: 25%;
+  top: ${convertToRem(450)};
   display: flex;
   gap: 4rem;
   list-style: none;
   li {
+    cursor: pointer;
     background-color: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
@@ -36,17 +39,15 @@ export const ListTechs = styled.ul`
     align-items: center;
     justify-content: center;
     height: 7rem;
-    width: 13rem;
+    min-width: 13rem;
+    transition: 0.3s;
+    :hover{
+            font-weight: 600;
+            padding-bottom: 16px;
+        }
   }
 
-  @media (max-width: 1470px) {
-    left: 20%;
-  }
-  @media (max-width: 950px) {
-    left: 5%;
-  }
   @media (max-width: 800px) {
-    left: 2%;
     gap: 1rem;
   }
 `;

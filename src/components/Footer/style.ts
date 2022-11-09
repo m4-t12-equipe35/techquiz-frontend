@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import convertToRem from "../../utils/convertToRem";
 
 export const FooterStyled = styled.footer`
   display: flex;
@@ -6,9 +7,10 @@ export const FooterStyled = styled.footer`
   align-items: center;
   background-color: var(--grey-light);
   color: var(--grey-text);
+  margin-top: ${convertToRem(60)};
 
   width: 100%;
-  height: 60px;
+  height: ${convertToRem(60)};
 
   p {
     font-size: 10px;

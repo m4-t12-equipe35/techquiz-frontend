@@ -5,7 +5,8 @@ export const QuestionsMain = styled.main`
   width: 90%;
   max-width: ${convertToRem(1600)};
   height: 100%;
-  margin: ${convertToRem(60)} auto;
+  margin: 0 auto;
+  margin-bottom: ${convertToRem(100)};
   display: flex;
   justify-content: space-between;
   gap: ${convertToRem(65)};
@@ -64,12 +65,13 @@ export const QuestionsList = styled.ul`
 `
 
 export const QuestionItem = styled.li`
+  cursor: pointer;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
   height: ${convertToRem(120)};
-  padding: 0 10%;
+  padding: 0 5%;
   border-radius: 15px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background-color: var(--white);
@@ -80,5 +82,6 @@ export const QuestionItem = styled.li`
   :hover{
   background-color: var(--blue-light);
   color: var(--white);
+  padding: 0 7%;
   }
 `

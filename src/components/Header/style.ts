@@ -1,21 +1,33 @@
 import styled from "styled-components";
+import convertToRem from "../../utils/convertToRem";
 
 interface IButtonStyles {
-    login:  string
+    login: string
 }
 
 export const HeaderStyled = styled.header`
 
     width: 100%;
-    height: 60px;
+    height: ${convertToRem(60)};
     background-color: var(--blue);
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: ${convertToRem(10)};
+    margin-bottom: ${convertToRem(60)};
+
+    nav {
+        width: 90%;
+        max-width: ${convertToRem(1600)};
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
     span{
-        font-size: 20px;
+        cursor: pointer;
+        font-size: ${convertToRem(20)};
         font-weight: 600;
         color: var(--white);
     }
@@ -24,12 +36,12 @@ export const HeaderStyled = styled.header`
 
 export const ButtonStyled = styled.button<IButtonStyles>`
 
-    background-color: ${({login}) => login === 'login' ? "#C6FB9D" : "#F8C6C6"};
+    background-color: ${({ login }) => login === 'login' ? "var(--green)" : "var(--soft-pink)"};
     cursor: pointer;
-    border-color: ${({login}) => login === 'login' ? "#C6FB9D" : "#F8C6C6"};
+    border-color: ${({ login }) => login === 'login' ? "var(--green)" : "var(--soft-pink)"};
     border: none;
-    width: 80px;
-    height: 35px;
+    width: ${convertToRem(80)};
+    height: ${convertToRem(35)};
     display: flex;
     padding: 5px;
     justify-content: space-between;
