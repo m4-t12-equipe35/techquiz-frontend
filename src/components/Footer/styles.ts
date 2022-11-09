@@ -16,7 +16,8 @@ export const FooterStyled = styled.footer`
   }
 
   @media (min-width: 768px) {
-    margin-top: 6.5rem;
+    position: fixed;
+    bottom: 0;
     height: 40px;
 
     p {
