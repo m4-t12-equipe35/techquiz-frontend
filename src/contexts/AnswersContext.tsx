@@ -35,18 +35,20 @@ export const AnswerContext = createContext<IAnswersContext>(
 );
 
 export function AnswareProvider({ children }: IAnswerProviderProps) {
-  const [answers, setAnswers] = useState<IAnswersRequest[]>([] as IAnswersRequest[]);
+  const [answers, setAnswers] = useState<IAnswersRequest[]>(
+    [] as IAnswersRequest[]
+  );
   const [questionTitle, setQuestionTitle] = useState("");
   const { token } = useContext(UserContext);
 
   useEffect(() => {
-    function getAnswers(){
+    function getAnswers() {
       return answers;
     }
     if (token) {
       getAnswers();
     }
-  }, [token]);
+  }, [token, answers]);
 
   return (
     <AnswerContext.Provider
@@ -54,7 +56,7 @@ export function AnswareProvider({ children }: IAnswerProviderProps) {
         answers,
         setAnswers,
         questionTitle,
-        setQuestionTitle
+        setQuestionTitle,
       }}
     >
       {children}
